@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/header.svg" alt="LLMPreSS — LLM Pretraining Semantic Search" width="100%" />
+<img src="assets/LLMPreSS-logo.svg" alt="LLMPreSS — LLM Pretraining Semantic Search" width="320" />
 
 <br />
 
