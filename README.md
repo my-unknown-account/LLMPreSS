@@ -295,25 +295,20 @@ Outputs are placed under `dist/`. The wheel includes the library and package met
 ```text
 .
 ├── assets/
-│   ├── LLMPreSS-logo.svg
-│   └── stickers/
-│       ├── semantic-search.svg
-│       ├── local-faiss.svg
-│       ├── index-editions.svg
-│       ├── passage-metadata.svg
-│       └── python-api.svg
+│   └── LLMPreSS-logo.svg
 ├── llmpress/
 │   ├── __init__.py
 │   ├── __main__.py
-│   ├── semantic_search.py
+│   ├── _engine.py
 │   ├── _index_files.py
-│   └── _engine.py
+│   └── semantic_search.py
 ├── notebooks/
+│   ├── example_search.py
 │   └── interactive_search.ipynb
-├── notebooks/example_search.py
+├── .gitignore
 ├── pyproject.toml
-├── requirements.txt
-└── README.md
+├── README.md
+└── requirements.txt
 ```
 
 </details>
