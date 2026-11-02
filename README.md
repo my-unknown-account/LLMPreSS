@@ -61,7 +61,7 @@ for result in results:
 > Model and index files are separate from the Python package.
 
 Open the [interactive notebook](notebooks/interactive_search.ipynb) to search ClimbMix
-in your browser. It checks the index download size, loads the client, and provides
+in your browser. It downloads and loads the index, then provides
 a query box with ranked passages, source metadata, and optional JSON export.
 Choose a runtime with enough disk space and RAM for the index.
 
