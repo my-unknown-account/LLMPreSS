@@ -1,12 +1,37 @@
-# LLMPreSS — LLM Pretraining Semantic Search
+<div align="center">
 
-LLMPreSS searches a local FAISS index and retrieves matching passage text from
-an HTTP API. Its Python package name is **`llmpress`**.
+# LLMPreSS
 
-## Install
+### LLM Pretraining Semantic Search
 
-Use Python 3.10 or newer. Run these commands from the project directory
-containing this README and `pyproject.toml`:
+**Find relevant passages in pretraining corpora with a few lines of Python.**
+
+Search local FAISS indexes. Retrieve passage text. Keep querying with one reusable client.
+
+[![Tests](https://github.com/my-unknown-account/LLMPreSS/actions/workflows/tests.yml/badge.svg)](https://github.com/my-unknown-account/LLMPreSS/actions/workflows/tests.yml)
+![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)
+![FAISS](https://img.shields.io/badge/Search-FAISS-6366F1)
+![Version 0.1.0](https://img.shields.io/badge/version-0.1.0-14B8A6)
+
+[Quick start](#quick-start) · [How it works](#how-it-works) · [Usage](#usage) · [Configuration](#configuration) · [Development](#development)
+
+</div>
+
+---
+
+## Why LLMPreSS?
+
+| | What you get |
+| :--- | :--- |
+| **Semantic retrieval** | Search passages by meaning using BGE query encoding and a local FAISS index. |
+| **Automatic setup** | Select a corpus and edition; the client resolves and downloads the published index. |
+| **Passage text** | Retrieve matching passages and source metadata through an HTTP API. |
+| **Reusable client** | Load the index and encoder once, then run successive queries. |
+| **Flexible output** | Work with Python result objects, export JSON, or retrieve only local IDs and scores. |
+
+## Quick start
+
+Requires **Python 3.10+**.
 
 ```bash
 git clone https://github.com/my-unknown-account/LLMPreSS.git
@@ -14,24 +39,10 @@ cd LLMPreSS
 python -m pip install .
 ```
 
-For development, use an editable installation instead:
-
-```bash
-python -m pip install -e .
-```
-
-Dependencies are installed from this project's `requirements.txt`. The default
-encoder runs on CPU. For GPU query encoding, install a CUDA-compatible PyTorch
-build for your machine and pass `device="cuda:0"`; FAISS search still uses CPU.
-
-## Search an index
-
-Specify the corpus and edition; repository names and URLs are handled internally:
-
 ```python
 from llmpress import SemanticIndex
 
-index = SemanticIndex("RedPajama", edition="compact", threads=32, verbose=True)
+index = SemanticIndex("RedPajama", edition="compact")
 results = index.search("Hamiltonian paths in cubic graphs", top_k=20)
 
 for result in results:
@@ -39,141 +50,220 @@ for result in results:
     print(result.text)
 ```
 
-`index_dir` is the single location used for both loading and downloading. When
-omitted, it resolves to `~/.cache/llmpress/<corpus>/<edition>/`. Choose a different
-destination with the same parameter:
+> [!NOTE]
+> On first use, the client downloads the selected index and the encoder model.
+> Automatic index downloads require that edition to be published on Hugging Face.
+> Model and index files are separate from the Python package.
+
+Prefer an interactive example? Run [`python example_search.py`](example_search.py)
+from the repository root after installation.
+
+## How it works
+
+```mermaid
+flowchart LR
+    A[Your query] --> B[BGE encoder]
+    B --> C[Local FAISS index]
+    C --> D[Ranked IDs and scores]
+    D --> E[Passage HTTP API]
+    E --> F[Passage text and metadata]
+```
+
+Vector search runs locally on the CPU. Query encoding also uses the CPU by default,
+with optional GPU support. `search()` retrieves the matching text from the passage
+API; `search_ids()` returns local matches without making passage API calls.
+
+## Usage
+
+### Choose where indexes live
+
+By default, indexes are cached under:
+
+```text
+~/.cache/llmpress/<corpus>/<edition>/
+```
+
+Use `index_dir` to choose a directory for both loading and downloading:
 
 ```python
 index = SemanticIndex(
-    "RedPajama", edition="quality", index_dir="/data/indexes/quality",
-    threads=32, verbose=False,
+    "RedPajama",
+    edition="quality",
+    index_dir="/data/indexes/quality",
+    threads=32,
+    verbose=False,
 )
 ```
 
-The client checks that directory first:
+| Directory state | Client behavior |
+| :--- | :--- |
+| Valid index | Loads it directly without contacting the Hub. |
+| Missing or empty | Downloads `index.faiss`, `index.json`, and `lists.ivfdata`, then validates them. |
+| Nonempty but incompatible | Raises `ValueError` without downloading or replacing its contents. |
 
-- **Valid index:** load it directly without contacting the Hub.
-- **Missing or empty directory:** download `index.faiss`, `index.json` and
-  `lists.ivfdata` into it from the matching published repository, then validate.
-- **Nonempty but incompatible directory:** raise a clear `ValueError` without
-  downloading or replacing its contents. Required files, metadata, declared file
-  sizes, corpus and edition must be correct.
+Each directory holds one corpus and edition. Validation checks required files,
+metadata, declared file sizes, corpus, and edition. The encoder uses the model
+settings and pinned revision selected by the index and is cached by Hugging Face.
 
-Each chosen directory holds one corpus and edition; the default location
-separates them automatically. Automatic downloads require the selected index
-to be available on Hugging Face.
+### Work with results
 
-The BGE encoder is downloaded and cached automatically by Hugging Face, using the
-model settings and pinned revision selected by the index. No checkpoint path or
-separate download switch is required. Reuse the loaded index for successive queries.
+`search()` returns a ranked list of `SearchResult` objects:
 
-`search()` returns a ranked list of `SearchResult` objects. Each exposes
-`numeric_id`, `passage_id`, `score`, `rank`, `text`, `corpus`, `source_rel_path`,
-`source_group` and `source_record_index`. Scores come from local vector search;
-higher is better. Unavailable metadata is `None`.
+| Field | Meaning |
+| :--- | :--- |
+| `numeric_id` | Numeric passage identifier within the corpus |
+| `passage_id` | Original passage identifier, when available |
+| `score` | Local vector search score; higher is better |
+| `rank` | One-based position in the results |
+| `text` | Retrieved passage text |
+| `corpus` | Corpus name |
+| `source_rel_path` | Source file path, when available |
+| `source_group` | Source group, when available |
+| `source_record_index` | Source record index, when available |
 
-The default passage endpoint is `https://api.jmozafari.com`. Configure it once in
-the constructor with `api_url="https://your-api/"` and `timeout=120` if needed.
-Requests exceeding 1,000 IDs are split into sequential batches and combined in
-order. No partial result list is returned if an API request fails.
-
-To save results, convert the objects to dictionaries in your own code:
+Unavailable metadata is `None`. Use `to_dict()` to preserve extra API metadata
+and omit unavailable optional fields when exporting:
 
 ```python
 import json
 from pathlib import Path
 
-payload = {"query": "Hamiltonian paths in cubic graphs",
-           "results": [result.to_dict() for result in results]}
+payload = {
+    "query": "Hamiltonian paths in cubic graphs",
+    "results": [result.to_dict() for result in results],
+}
 Path("results.json").write_text(
-    json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8"
+    json.dumps(payload, ensure_ascii=False, indent=2),
+    encoding="utf-8",
 )
 ```
 
-`to_dict()` preserves extra API metadata and omits unavailable optional fields.
-The library does not prompt for input or save files.
+The library leaves prompting and saving files to your application.
 
-For local IDs and scores without passage API calls, use `search_ids()`:
+### Retrieve only IDs and scores
 
 ```python
 matches = index.search_ids("Hamiltonian paths in cubic graphs", top_k=20)
+
 for match in matches:
     print(match.numeric_id, match.score)
 ```
 
 These are also `SearchResult` objects, with `text` and `passage_id` set to `None`.
+The index and encoder must already be available locally for fully offline use.
+
+### Search from the terminal
+
+Use the CLI to search a local index and print IDs and scores:
+
+```bash
+python -m llmpress \
+  --index /path/to/index \
+  --query "What is semantic search?" \
+  --top-k 10 \
+  --json
+```
+
+The installed `llmpress` command is equivalent to `python -m llmpress`. If `--index`
+is omitted, the CLI uses the current working directory.
+
+## Configuration
+
+| Option | Purpose |
+| :--- | :--- |
+| `index_dir` | Directory used to load or download an index |
+| `device` | Encoder device; defaults to CPU, or use `"cuda:0"` with compatible PyTorch |
+| `threads` | CPU search thread count |
+| `nprobe` | Override the index's search breadth |
+| `api_url` | Passage service URL; defaults to `https://api.jmozafari.com` |
+| `timeout` | Passage API request timeout in seconds |
+| `verbose` | Enable or disable client progress and status messages |
+
 Both search methods accept `candidates` and `refine` to control re-ranking.
-Set `nprobe` in the constructor to override the index's search breadth.
+For full parameter documentation, use `help(SemanticIndex)` or
+`python -m llmpress --help`. The lower-level `SemanticSearcher` is also available
+for advanced integrations.
 
-Set `verbose=False` in the constructor to disable client progress and status
-messages. Nonempty service notices (`info`, `warning`, `critical`) are still
-shown on stderr, even with `verbose=False`. Identical notices appear once per
-search rather than once per API batch. `NO_COLOR=1` disables terminal colors. Third-party libraries retain
-their own output settings. The encoder uses the Hugging Face cache and downloads
-the pinned model on first use; model and index files are not part of the package.
+<details>
+<summary><strong>GPU query encoding</strong></summary>
 
-You can also run offline search from a terminal:
+Install a CUDA-compatible PyTorch build for your machine, then select the encoder
+device when constructing the index:
 
-```bash
-python -m llmpress --index /path/to/index --query "What is semantic search?" --top-k 10 --json
+```python
+index = SemanticIndex("RedPajama", edition="compact", device="cuda:0")
 ```
 
-The equivalent installed command is `llmpress`. The index defaults to the current
-working directory when `--index` is omitted. Use `python -m llmpress --help` or
-`help(SemanticIndex)` for parameters and documentation.
+FAISS search continues to run on the CPU.
 
-`SemanticIndex` is the main retrieval interface. The lower-level
-`SemanticSearcher` interface is also available for advanced integrations.
+</details>
 
-## Example
+<details>
+<summary><strong>Passage API behavior and service notices</strong></summary>
 
-After installing the package, run an interactive search from the repository root:
+Requests exceeding 1,000 IDs are split into sequential batches and combined in
+order. If an API request fails, the client does not return a partial result list.
 
-```bash
-python example_search.py
-```
+Service notices (`info`, `warning`, `critical`) appear on stderr even when
+`verbose=False`. Identical notices appear once per search. Set `NO_COLOR=1` to
+disable terminal colors. Third-party libraries retain their own output settings.
 
-The example downloads the RedPajama compact index on first use. Edit the corpus,
-edition or index directory in the script to use a different index.
+</details>
 
 ## Development
 
-The unit tests use mocked encoders and downloads; they do not require index files,
-models or a passage server:
+Install an editable copy:
 
 ```bash
-python -m pip install --no-deps -e .
+python -m pip install -e .
+```
+
+### Run tests
+
+Tests mock encoders and downloads, so they need no models, index files, or passage
+server. The packaging test also builds and installs the client independently.
+
+```bash
 python -m pip install pytest wheel
 python -m pytest
 ```
 
-## Build a distribution
+For a lightweight test environment, install the package with
+`python -m pip install --no-deps -e .` instead of installing all runtime dependencies.
+GitHub Actions runs the tests on Python 3.10 and 3.12.
 
-From the repository root:
+### Build a distribution
 
 ```bash
 python -m pip install build
 python -m build
 ```
 
-The wheel and source archive are written to `dist/`. They include the `llmpress`
-library and package metadata. The example is excluded from distributions;
-tests may be included in the source archive.
+Distributions are written to `dist/`. The wheel contains the library and package
+metadata. The interactive example is excluded from distributions; tests may be
+included in the source archive.
 
-
-## Project layout
+<details>
+<summary><strong>Repository layout</strong></summary>
 
 ```text
 .
-├── README.md
-├── pyproject.toml
-├── requirements.txt
+├── .github/workflows/tests.yml
 ├── llmpress/
 │   ├── __init__.py
 │   ├── __main__.py
 │   ├── semantic_search.py
 │   ├── _index_files.py
 │   └── _engine.py
+├── tests/
 ├── example_search.py
-└── tests/
+├── pyproject.toml
+├── requirements.txt
+└── README.md
 ```
+
+</details>
+
+---
+
+[Report an issue](https://github.com/my-unknown-account/LLMPreSS/issues) · [View test runs](https://github.com/my-unknown-account/LLMPreSS/actions)
