@@ -1,18 +1,22 @@
 <div align="center">
 
-# LLMPreSS
+<img src="assets/header.svg" alt="LLMPreSS — LLM Pretraining Semantic Search" width="100%" />
 
-### LLM Pretraining Semantic Search
+<br />
+
+**LLMPreSS** — **LLM** **Pre**training **S**emantic **S**earch
 
 **Find relevant passages in pretraining corpora with a few lines of Python.**
 
-Search local FAISS indexes. Retrieve passage text. Keep querying with one reusable client.
+From a natural-language query to ranked passages and source metadata.
 
-![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)
-![FAISS](https://img.shields.io/badge/Search-FAISS-6366F1)
-![Version 0.1.0](https://img.shields.io/badge/version-0.1.0-14B8A6)
+[![Hugging Face collection](https://img.shields.io/badge/🤗_Hugging_Face-Index_collection-FFD21E?style=flat-square)](https://huggingface.co/collections/JamshidJDMY/llmpress)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white)](#quick-start)
+[![Version 0.1.0](https://img.shields.io/badge/version-0.1.0-14B8A6?style=flat-square)](pyproject.toml)
+[![Last commit](https://img.shields.io/github/last-commit/my-unknown-account/LLMPreSS?style=flat-square&color=64748B)](https://github.com/my-unknown-account/LLMPreSS/commits/main)
+[![Issues](https://img.shields.io/github/issues/my-unknown-account/LLMPreSS?style=flat-square&color=8B5CF6)](https://github.com/my-unknown-account/LLMPreSS/issues)
 
-[Quick start](#quick-start) · [How it works](#how-it-works) · [Usage](#usage) · [Configuration](#configuration) · [Development](#development)
+[**Quick start**](#quick-start) · [**Index collection ↗**](https://huggingface.co/collections/JamshidJDMY/llmpress) · [Usage](#usage) · [Configuration](#configuration) · [Development](#development)
 
 </div>
 
@@ -75,6 +79,9 @@ API; `search_ids()` returns local matches without making passage API calls.
 ## Usage
 
 ### Choose where indexes live
+
+Browse the [LLMPreSS index collection on Hugging Face](https://huggingface.co/collections/JamshidJDMY/llmpress)
+for published corpora and editions.
 
 By default, indexes are cached under:
 
