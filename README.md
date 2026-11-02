@@ -6,17 +6,19 @@
 
 **LLMPreSS** — **LLM** **Pre**training **S**emantic **S**earch
 
-**Find relevant passages in pretraining corpora with a few lines of Python.**
+**Search pretraining corpora by meaning.**
 
-From a natural-language query to ranked passages and source metadata.
+Find passages that are semantically relevant to your question or topic,
+even when they use different words. LLMPreSS encodes your query and searches
+a local vector index for similar passages, then retrieves their text and available
+source metadata through a passage API.
 
+[![Open in Colab](https://img.shields.io/badge/Google_Colab-Open_notebook-F9AB00?style=flat-square&logo=googlecolab&logoColor=white)](https://colab.research.google.com/github/my-unknown-account/LLMPreSS/blob/main/notebooks/interactive_search.ipynb)
 [![Hugging Face collection](https://img.shields.io/badge/🤗_Hugging_Face-Index_collection-FFD21E?style=flat-square)](https://huggingface.co/collections/JamshidJDMY/llmpress)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white)](#quick-start)
 [![Version 0.1.0](https://img.shields.io/badge/version-0.1.0-14B8A6?style=flat-square)](pyproject.toml)
-[![Last commit](https://img.shields.io/github/last-commit/my-unknown-account/LLMPreSS?style=flat-square&color=64748B)](https://github.com/my-unknown-account/LLMPreSS/commits/main)
-[![Issues](https://img.shields.io/github/issues/my-unknown-account/LLMPreSS?style=flat-square&color=8B5CF6)](https://github.com/my-unknown-account/LLMPreSS/issues)
 
-[**Quick start**](#quick-start) · [**Index collection ↗**](https://huggingface.co/collections/JamshidJDMY/llmpress) · [Usage](#usage) · [Configuration](#configuration) · [Development](#development)
+[**Quick start**](#quick-start) · [Usage](#usage) · [Configuration](#configuration) · [Development](#development)
 
 </div>
 
@@ -45,7 +47,7 @@ python -m pip install .
 ```python
 from llmpress import SemanticIndex
 
-index = SemanticIndex("RedPajama", edition="compact")
+index = SemanticIndex("ClimbMix", edition="compact", verbose=True, threads=32)
 results = index.search("Hamiltonian paths in cubic graphs", top_k=20)
 
 for result in results:
@@ -58,7 +60,12 @@ for result in results:
 > Automatic index downloads require that edition to be published on Hugging Face.
 > Model and index files are separate from the Python package.
 
-Prefer an interactive example? Run [`python example_search.py`](example_search.py)
+Open the [interactive notebook](notebooks/interactive_search.ipynb) to search ClimbMix
+in your browser. It checks the index download size, loads the client, and provides
+a query box with ranked passages, source metadata, and optional JSON export.
+Choose a runtime with enough disk space and RAM for the index.
+
+For a local terminal example, run [`python example_search.py`](example_search.py)
 from the repository root after installation.
 
 ## How it works
@@ -245,6 +252,7 @@ metadata. The interactive example is excluded from distributions.
 │   ├── semantic_search.py
 │   ├── _index_files.py
 │   └── _engine.py
+├── notebooks/interactive_search.ipynb
 ├── example_search.py
 ├── pyproject.toml
 ├── requirements.txt
