@@ -125,13 +125,20 @@ flowchart LR
 
 Explore the complete **[LLMPreSS index collection on Hugging Face](https://huggingface.co/collections/JamshidJDMY/llmpress)**. Each currently published corpus has both **Compact** and **Quality** editions:
 
-| Corpus | Indexed passages | 📦 Compact | 🎯 Quality |
-| :--- | ---: | ---: | ---: |
-| **RedPajama** | ~1.53 billion | [**~61.5 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_RedPajama_compact) | [**~110.5 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_RedPajama_quality) |
-| **ClimbMix** | ~614 million | [**~24.8 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_ClimbMix_compact) | [**~44.5 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_ClimbMix_quality) |
-| **Amber** | ~1.21 billion | [**~48.5 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_Amber_compact) | [**~87.1 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_Amber_quality) |
+| Corpus | Related LLM | Indexed passages | 📦 Compact | 🎯 Quality |
+| :--- | :--- | ---: | ---: | ---: |
+| **RedPajama** | [RedPajama-INCITE-7B-Instruct](https://huggingface.co/togethercomputer/RedPajama-INCITE-7B-Instruct) | ~1.53 billion | [**~61.5 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_RedPajama_compact) | [**~110.5 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_RedPajama_quality) |
+| **ClimbMix** | Exact corpus match not verified | ~614 million | [**~24.8 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_ClimbMix_compact) | [**~44.5 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_ClimbMix_quality) |
+| **Amber** | [AmberChat](https://huggingface.co/IFM/AmberChat) | ~1.21 billion | [**~48.5 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_Amber_compact) | [**~87.1 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_Amber_quality) |
 
 *Sizes are approximate downloads (decimal GB) for `index.faiss` + `lists.ivfdata`, excluding the separately cached encoder and any filesystem/download overhead. Click a size to view its Hugging Face repository.*
+
+**Model–corpus relationships:** RedPajama-INCITE-7B-Instruct and AmberChat are
+instruction-tuned descendants of models pretrained on their respective corpora;
+their fine-tuning uses additional data, so these indexes do not represent their
+complete training histories. For ClimbMix, the [original project](https://research.nvidia.com/labs/lpr/climb/)
+reports training from scratch, but we have not verified a released checkpoint
+trained exclusively on exactly the corpus indexed here.
 
 - **📦 Compact:** Prioritizes a smaller index footprint for personal-computer use.
 - **🎯 Quality:** Uses a higher-fidelity index configuration, trading additional storage for improved retrieval quality.
