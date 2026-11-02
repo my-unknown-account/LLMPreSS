@@ -2,7 +2,7 @@
 
 <img src="assets/LLMPreSS-logo.svg" alt="LLMPreSS — LLM Pretraining Semantic Search" width="300" />
 
-# *LLM* *Pre*training *S*emantic *S*earch
+# <ins>LLM</ins> <ins>Pre</ins>training <ins>S</ins>emantic <ins>S</ins>earch
 
 <p align="center"><a href="https://colab.research.google.com/github/my-unknown-account/LLMPreSS/blob/main/notebooks/interactive_search.ipynb"><img src="https://img.shields.io/badge/Try_in-Google_Colab-F9AB00?style=flat-square&logo=googlecolab&logoColor=white" alt="Try in Google Colab" /></a>&nbsp;<a href="https://huggingface.co/collections/JamshidJDMY/llmpress"><img src="https://img.shields.io/badge/🤗_Hugging_Face-Indexes-FFD21E?style=flat-square" alt="Hugging Face indexes" /></a>&nbsp;<a href="#quick-start"><img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.10+" /></a>&nbsp;<a href="pyproject.toml"><img src="https://img.shields.io/badge/v0.1.0-8B5CF6?style=flat-square" alt="Version 0.1.0" /></a></p>
 
