@@ -2,22 +2,19 @@
 
 <img src="assets/LLMPreSS-logo.svg" alt="LLMPreSS — LLM Pretraining Semantic Search" width="300" />
 
-# LLMPreSS
+# LLM Pretraining Semantic Search
 
-**LLM Pretraining Semantic Search**
+### Explore LLM pretraining corpora, semantically.
 
-### Search LLM pretraining corpora, semantically.
+**Semantic passage retrieval, right from your laptop.** Encode queries and search massive pretraining indexes locally with FAISS—no hosted vector-search engine or dedicated server required. When you want to read a match, LLMPreSS fetches **only the matching passage text and available source metadata** from a remote passage API.
 
-Explore pretraining data through **semantic passage retrieval**. Ask a question, search a local FAISS index, and retrieve relevant passages with available source metadata—even when the passages use different wording.
+Discover semantically relevant passages even when their wording differs from your query.
 
-<p>
-  <a href="https://colab.research.google.com/github/my-unknown-account/LLMPreSS/blob/main/notebooks/interactive_search.ipynb"><img src="https://img.shields.io/badge/Try_it_in-Colab-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white" alt="Try it in Google Colab" /></a>
-  <a href="https://huggingface.co/collections/JamshidJDMY/llmpress"><img src="https://img.shields.io/badge/Explore-Indexes-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black" alt="Explore indexes on Hugging Face" /></a>
-</p>
-<p>
+<p align="center">
+  <a href="https://colab.research.google.com/github/my-unknown-account/LLMPreSS/blob/main/notebooks/interactive_search.ipynb"><img src="https://img.shields.io/badge/Try_in-Google_Colab-F9AB00?style=flat-square&logo=googlecolab&logoColor=white" alt="Try in Google Colab" /></a>
+  <a href="https://huggingface.co/collections/JamshidJDMY/llmpress"><img src="https://img.shields.io/badge/🤗_Hugging_Face-Indexes-FFD21E?style=flat-square" alt="Hugging Face indexes" /></a>
   <a href="#quick-start"><img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.10+" /></a>
-  <a href="#how-it-works"><img src="https://img.shields.io/badge/Vector_Search-FAISS-0B7285?style=flat-square" alt="FAISS vector search" /></a>
-  <a href="pyproject.toml"><img src="https://img.shields.io/badge/Version-0.1.0-8B5CF6?style=flat-square" alt="Version 0.1.0" /></a>
+  <a href="pyproject.toml"><img src="https://img.shields.io/badge/v0.1.0-8B5CF6?style=flat-square" alt="Version 0.1.0" /></a>
 </p>
 
 **[🚀 Quick start](#quick-start)** · **[✨ Features](#why-llmpress)** · **[🧠 How it works](#how-it-works)** · **[📚 Indexes](#indexes-and-editions)** · **[🐍 Python API](#python-api)** · **[⚙️ Configuration](#configuration)**
@@ -28,53 +25,28 @@ Explore pretraining data through **semantic passage retrieval**. Ask a question,
 
 ## ✨ Why LLMPreSS?
 
-LLMPreSS makes large LLM pretraining corpora accessible through **semantic retrieval**, rather than requiring exact keyword or phrase matches. Query vectors and FAISS search run locally; passage text and metadata are fetched from a separate API when requested.
+**Your laptop does the semantic search. The remote API only supplies the passages.** LLMPreSS combines local query encoding and FAISS retrieval with on-demand access to pretraining passage text and source information.
 
-<table>
-  <tr>
-    <td align="center" width="50%" valign="top">
-      <img src="assets/stickers/semantic-search.svg" width="88" alt="Semantic search sticker" /><br />
-      <strong>🔎 Semantic passage search</strong><br />
-      Find passages that are semantically relevant, including those expressed with different terminology.
-    </td>
-    <td align="center" width="50%" valign="top">
-      <img src="assets/stickers/local-faiss.svg" width="88" alt="Local FAISS sticker" /><br />
-      <strong>💻 Local FAISS retrieval</strong><br />
-      Run vector search on your computer, without a hosted vector-search service.
-    </td>
-  </tr>
-  <tr>
-    <td align="center" valign="top">
-      <img src="assets/stickers/index-editions.svg" width="88" alt="Index editions sticker" /><br />
-      <strong>📦 Downloadable index editions</strong><br />
-      Select a published corpus and choose between <code>compact</code> and <code>quality</code>.
-    </td>
-    <td align="center" valign="top">
-      <img src="assets/stickers/passage-metadata.svg" width="88" alt="Passage and metadata sticker" /><br />
-      <strong>📄 Passage text &amp; metadata</strong><br />
-      Retrieve ranked matches with passage text and available source information.
-    </td>
-  </tr>
-  <tr>
-    <td align="center" valign="top">
-      <img src="assets/stickers/python-api.svg" width="88" alt="Python API sticker" /><br />
-      <strong>🐍 Python-first workflow</strong><br />
-      Load once, run repeated queries, and export structured results as JSON.
-    </td>
-    <td align="center" valign="top">
-      <img src="assets/stickers/offline-results.svg" width="88" alt="Offline ID retrieval sticker" /><br />
-      <strong>⚡ API-free ID retrieval</strong><br />
-      Search for passage IDs and scores locally with <code>search_ids()</code>.
-    </td>
-  </tr>
-</table>
+<p align="center">
+  <img src="assets/stickers/semantic-search.svg" width="104" alt="Semantic search sticker" />
+  <img src="assets/stickers/local-faiss.svg" width="104" alt="Laptop-based FAISS search sticker" />
+  <img src="assets/stickers/index-editions.svg" width="104" alt="Downloadable indexes sticker" />
+  <img src="assets/stickers/passage-metadata.svg" width="104" alt="Passage metadata sticker" />
+  <img src="assets/stickers/python-api.svg" width="104" alt="Python API sticker" />
+</p>
+
+- **🔎 Semantic passage retrieval** — Find relevant passages even when they express the same topic using different terminology.
+- **💻 Laptop-first, local search** — Encode your query and search the FAISS index on your own machine; CPU execution is supported, with optional GPU query encoding.
+- **📦 Downloadable indexes** — Select a published corpus and choose its `compact` or `quality` edition.
+- **🌐 On-demand passage retrieval** — Use the remote passage API *only* to obtain matching text and available source metadata after local retrieval.
+- **🐍 Python-native workflow** — Load an index once, search repeatedly, and export structured results as JSON.
 
 > [!IMPORTANT]
-> **Local search ≠ local passage text.** Both search methods run FAISS locally. `search()` contacts the passage API for text and metadata, whereas `search_ids()` returns local IDs and scores without calling the API.
+> **No hosted vector-search engine is required.** Semantic search runs locally on your laptop. For `search()`, an internet connection is needed to retrieve the matched passages and metadata from the remote API.
 
 ## 🚀 Quick start
 
-**Requirements:** Python 3.10+ and enough RAM and disk space for the selected index.
+**Requirements:** Python 3.10+ and a **laptop or desktop** with enough RAM and disk space for the selected index. **No dedicated search server or GPU is required.** Once the index and encoder are downloaded, semantic retrieval runs locally; internet access is needed to fetch passage text and metadata from the remote API.
 
 ### ① Install
 
@@ -119,23 +91,22 @@ python example_search.py
 
 ```mermaid
 flowchart LR
-    Q["🔎 Research query"] --> E
-    subgraph LOCAL["💻 Your machine"]
-        E["BGE query encoder"] --> I["Local FAISS index"]
-        I --> R["Ranked IDs + scores"]
+    Q["🔎 Your query"] --> E
+    subgraph LAPTOP["💻 Your laptop · local"]
+        E["BGE query encoder"] --> I["FAISS semantic index"]
+        I --> R["Ranked passage IDs + scores"]
     end
-    R -->|"search_ids()"| L["IDs + scores"]
-    R -->|"search()"| A["Passage HTTP API"]
-    A --> T["Passage text + metadata"]
+    R -->|"Matched IDs only"| A["🌐 Remote passage API"]
+    A --> T["📄 Passage text + metadata"]
 ```
 
-**Encode → Retrieve → Resolve.** The index defines the query encoder and its pinned model revision. The encoder transforms your query into a vector; FAISS searches the local index; `search()` then requests matched passages from the HTTP API.
+**Encode locally → Search locally → Fetch matching passages remotely.** The index specifies the BGE encoder and its pinned revision. Query encoding and FAISS vector retrieval run on your laptop; the passage API does **not** perform semantic search—it resolves the matched IDs into text and available metadata.
 
 | Step | Runs where | What happens |
 | :--- | :--- | :--- |
-| **🧠 Encode** | Local CPU by default; optional CUDA | Convert the query to a vector using the index-specified BGE encoder. |
-| **🔍 Retrieve** | Local CPU | Search the FAISS index for ranked passage IDs and scores. |
-| **📄 Resolve** | Remote passage API, for `search()` only | Fetch text and available source metadata for the matches. |
+| **🧠 Encode** | Your laptop (CPU by default; optional CUDA) | Convert the query to a vector using the index-specified BGE encoder. |
+| **🔍 Retrieve** | Your laptop (CPU) | Search the local FAISS index for ranked passage IDs and scores. |
+| **📄 Resolve** | Remote passage API | Retrieve passage text and available source metadata for matched IDs. |
 
 ## 📚 Indexes and editions
 
@@ -170,13 +141,13 @@ index = SemanticIndex(
 )
 ```
 
-| Directory state | Client behavior |
-| :--- | :--- |
-| **Valid index** | Loads directly; no new index download. |
-| **Missing or empty** | Downloads `index.faiss`, `index.json`, and `lists.ivfdata`, then validates them. |
-| **Nonempty but incompatible** | Raises `ValueError` instead of replacing the directory contents. |
+The client handles these cases automatically:
 
-Each directory stores one corpus/edition pair. Validation checks required files, metadata, declared file sizes, corpus, and edition. The encoder is cached separately by Hugging Face at the pinned revision defined by the index.
+- **Already downloaded:** A valid local index loads directly without contacting Hugging Face for the index files.
+- **Not downloaded yet:** A missing or empty index directory triggers a download of `index.faiss`, `index.json`, and `lists.ivfdata`, followed by validation.
+- **Incompatible files:** A nonempty directory containing an invalid index raises `ValueError`; existing files are not replaced.
+
+Each directory contains a single corpus/edition pair. The client verifies required files, index metadata, declared file sizes, corpus, and edition. Hugging Face caches the encoder separately at the pinned revision specified by the index.
 
 ## 🐍 Python API
 
@@ -229,37 +200,6 @@ Path("results.json").write_text(
 ```
 
 </details>
-
-### Search locally without requesting passage text
-
-Use `search_ids()` to return passage IDs and scores without contacting the API:
-
-```python
-matches = index.search_ids("Hamiltonian paths in cubic graphs", top_k=20)
-
-for hit in matches:
-    print(hit.numeric_id, hit.score)
-```
-
-These are also `SearchResult` objects, but `text` and `passage_id` are set to `None`. Fully offline ID retrieval requires the index and encoder to be cached locally. Both search methods accept `candidates` and `refine` options to control candidate retrieval and re-ranking.
-
-## ⌨️ Command-line interface
-
-Search a local index from your terminal:
-
-```bash
-llmpress \
-  --index /path/to/index \
-  --query "What is semantic search?" \
-  --top-k 10 \
-  --json
-```
-
-The CLI displays local IDs and scores. The installed `llmpress` command is equivalent to `python -m llmpress`; if `--index` is omitted, it uses the current working directory.
-
-```bash
-python -m llmpress --help
-```
 
 ## ⚙️ Configuration
 
@@ -338,8 +278,7 @@ Outputs are placed under `dist/`. The wheel includes the library and package met
 │       ├── local-faiss.svg
 │       ├── index-editions.svg
 │       ├── passage-metadata.svg
-│       ├── python-api.svg
-│       └── offline-results.svg
+│       └── python-api.svg
 ├── llmpress/
 │   ├── __init__.py
 │   ├── __main__.py
@@ -360,7 +299,7 @@ Outputs are placed under `dist/`. The wheel includes the library and package met
 
 <div align="center">
 
-### 🔎 Discover semantically relevant evidence from LLM pretraining data.
+### 💻 Search pretraining corpora locally. Explore matching passages remotely.
 
 <a href="https://huggingface.co/collections/JamshidJDMY/llmpress"><strong>📚 Browse indexes</strong></a>
 &nbsp; · &nbsp;
