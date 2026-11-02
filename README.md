@@ -133,12 +133,13 @@ Explore the complete **[LLMPreSS index collection on Hugging Face](https://huggi
 
 *Sizes are approximate downloads (decimal GB) for `index.faiss` + `lists.ivfdata`, excluding the separately cached encoder and any filesystem/download overhead. Click a size to view its Hugging Face repository.*
 
-**Model–corpus relationships:** RedPajama-INCITE-7B-Instruct and AmberChat are
-instruction-tuned descendants of models pretrained on their respective corpora;
-their fine-tuning uses additional data, so these indexes do not represent their
-complete training histories. For ClimbMix, the [original project](https://research.nvidia.com/labs/lpr/climb/)
-reports training from scratch, but we have not verified a released checkpoint
-trained exclusively on exactly the corpus indexed here.
+**Training data coverage:** The RedPajama index includes both the pretraining
+and instruction-tuning data used by
+[RedPajama-INCITE-7B-Instruct](https://huggingface.co/togethercomputer/RedPajama-INCITE-7B-Instruct).
+The Amber index likewise includes both the pretraining and instruction-tuning
+data used by [AmberChat](https://huggingface.co/IFM/AmberChat). This lets you search
+across both training stages for each model. For ClimbMix, we have not verified a
+released model trained on the entire indexed corpus without additional training data.
 
 - **📦 Compact:** Prioritizes a smaller index footprint for personal-computer use.
 - **🎯 Quality:** Uses a higher-fidelity index configuration, trading additional storage for improved retrieval quality.
