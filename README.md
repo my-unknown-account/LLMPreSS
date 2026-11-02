@@ -8,7 +8,6 @@
 
 Search local FAISS indexes. Retrieve passage text. Keep querying with one reusable client.
 
-[![Tests](https://github.com/my-unknown-account/LLMPreSS/actions/workflows/tests.yml/badge.svg)](https://github.com/my-unknown-account/LLMPreSS/actions/workflows/tests.yml)
 ![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![FAISS](https://img.shields.io/badge/Search-FAISS-6366F1)
 ![Version 0.1.0](https://img.shields.io/badge/version-0.1.0-14B8A6)
@@ -218,20 +217,6 @@ Install an editable copy:
 python -m pip install -e .
 ```
 
-### Run tests
-
-Tests mock encoders and downloads, so they need no models, index files, or passage
-server. The packaging test also builds and installs the client independently.
-
-```bash
-python -m pip install pytest wheel
-python -m pytest
-```
-
-For a lightweight test environment, install the package with
-`python -m pip install --no-deps -e .` instead of installing all runtime dependencies.
-GitHub Actions runs the tests on Python 3.10 and 3.12.
-
 ### Build a distribution
 
 ```bash
@@ -240,22 +225,19 @@ python -m build
 ```
 
 Distributions are written to `dist/`. The wheel contains the library and package
-metadata. The interactive example is excluded from distributions; tests may be
-included in the source archive.
+metadata. The interactive example is excluded from distributions.
 
 <details>
 <summary><strong>Repository layout</strong></summary>
 
 ```text
 .
-├── .github/workflows/tests.yml
 ├── llmpress/
 │   ├── __init__.py
 │   ├── __main__.py
 │   ├── semantic_search.py
 │   ├── _index_files.py
 │   └── _engine.py
-├── tests/
 ├── example_search.py
 ├── pyproject.toml
 ├── requirements.txt
@@ -266,4 +248,4 @@ included in the source archive.
 
 ---
 
-[Report an issue](https://github.com/my-unknown-account/LLMPreSS/issues) · [View test runs](https://github.com/my-unknown-account/LLMPreSS/actions)
+[Report an issue](https://github.com/my-unknown-account/LLMPreSS/issues)
