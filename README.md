@@ -18,6 +18,8 @@ With prebuilt, compressed FAISS indexes, LLMPreSS makes large-scale semantic ret
 
 ---
 
+<a id="why-llmpress"></a>
+
 ## ✨ Why LLMPreSS?
 
 ### Semantic access to pretraining data should not require a search cluster.
@@ -41,6 +43,8 @@ Semantic retrieval opens up research questions that exact lexical matches alone 
 
 > [!TIP]
 > **Your laptop is the search engine.** Local BGE query encoding and CPU-based FAISS retrieval do not require a dedicated server, GPU, or high-end CPU. The compressed index is stored on disk rather than requiring the entire pretraining corpus in memory. Once the index and encoder are downloaded, only the passage-text and metadata lookup needs an internet connection. Disk requirements vary by corpus and edition.
+
+<a id="quick-start"></a>
 
 ## 🚀 Quick start
 
@@ -90,6 +94,8 @@ The notebook automatically **installs LLMPreSS**, downloads the **selected corpu
 
 The example starts with **ClimbMix**. Choose a Colab runtime with enough available disk space and memory for your selected index; free runtime resource limits may vary.
 
+<a id="how-it-works"></a>
+
 ## 🧠 How it works
 
 ### Your computer handles the search. The API only retrieves the text.
@@ -112,6 +118,8 @@ flowchart LR
 **③ Retrieve matched passages remotely —** Only after the local search identifies the relevant passage IDs does LLMPreSS contact the passage API. The API resolves those IDs into **passage text and available source metadata**. It does **not** encode your query, search the vector index, or determine the semantic ranking.
 
 **The separation matters:** you get control over local semantic retrieval without operating a server that stores or searches the full pretraining corpus. Internet access is needed for the initial downloads and for retrieving the matching text; the downloaded encoder and index support local vector search.
+
+<a id="indexes-and-editions"></a>
 
 ## 📚 Indexes and editions
 
@@ -155,6 +163,8 @@ index = SemanticIndex(
 ```
 
 The index directory contains the FAISS index, its disk-backed vector data, and metadata. The encoder is cached separately at the revision specified by that metadata.
+
+<a id="python-api"></a>
 
 ## 🐍 Python API
 
@@ -207,6 +217,8 @@ Path("results.json").write_text(
 ```
 
 </details>
+
+<a id="configuration"></a>
 
 ## ⚙️ Configuration
 
