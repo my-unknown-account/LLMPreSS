@@ -4,15 +4,15 @@
 
 # <u>LLM</u> <u>Pre</u>training <u>S</u>emantic <u>S</u>earch
 
+<p align="center"><a href="https://colab.research.google.com/github/my-unknown-account/LLMPreSS/blob/main/notebooks/interactive_search.ipynb"><img src="https://img.shields.io/badge/Try_in-Google_Colab-F9AB00?style=flat-square&logo=googlecolab&logoColor=white" alt="Try in Google Colab" /></a>&nbsp;<a href="https://huggingface.co/collections/JamshidJDMY/llmpress"><img src="https://img.shields.io/badge/🤗_Hugging_Face-Indexes-FFD21E?style=flat-square" alt="Hugging Face indexes" /></a>&nbsp;<a href="#quick-start"><img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.10+" /></a>&nbsp;<a href="pyproject.toml"><img src="https://img.shields.io/badge/v0.1.0-8B5CF6?style=flat-square" alt="Version 0.1.0" /></a></p>
+
+**[🚀 Quick start](#quick-start)** · **[✨ Why LLMPreSS?](#why-llmpress)** · **[🧠 How it works](#how-it-works)** · **[📚 Indexes](#indexes-and-editions)** · **[🐍 Python API](#python-api)** · **[⚙️ Configuration](#configuration)**
+
 ### Semantic exploration of LLM pretraining data, now within everyone's reach.
 
 Searching LLM pretraining corpora semantically has traditionally demanded substantial computational resources, memory, and specialized infrastructure. **LLMPreSS changes that.**
 
 With prebuilt, compressed FAISS indexes, LLMPreSS makes large-scale semantic retrieval practical on **your own laptop or personal computer**. No powerful GPU, high-end CPU, or dedicated search server is required. Semantic search runs **locally**, while a lightweight remote API retrieves only the matching passages and their available source metadata.
-
-<p align="center"><a href="https://colab.research.google.com/github/my-unknown-account/LLMPreSS/blob/main/notebooks/interactive_search.ipynb"><img src="https://img.shields.io/badge/Try_in-Google_Colab-F9AB00?style=flat-square&logo=googlecolab&logoColor=white" alt="Try in Google Colab" /></a>&nbsp;<a href="https://huggingface.co/collections/JamshidJDMY/llmpress"><img src="https://img.shields.io/badge/🤗_Hugging_Face-Indexes-FFD21E?style=flat-square" alt="Hugging Face indexes" /></a>&nbsp;<a href="#quick-start"><img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.10+" /></a>&nbsp;<a href="pyproject.toml"><img src="https://img.shields.io/badge/v0.1.0-8B5CF6?style=flat-square" alt="Version 0.1.0" /></a></p>
-
-**[🚀 Quick start](#quick-start)** · **[✨ Why LLMPreSS?](#why-llmpress)** · **[🧠 How it works](#how-it-works)** · **[📚 Indexes](#indexes-and-editions)** · **[🐍 Python API](#python-api)** · **[⚙️ Configuration](#configuration)**
 
 </div>
 
