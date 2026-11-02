@@ -10,7 +10,7 @@ Searching LLM pretraining corpora semantically has traditionally demanded substa
 
 With prebuilt, compressed FAISS indexes, LLMPreSS makes large-scale semantic retrieval practical on **your own laptop or personal computer**. No powerful GPU, high-end CPU, or dedicated search server is required. Semantic search runs **locally**, while a lightweight remote API retrieves only the matching passages and their available source metadata.
 
-<p align="center"><a href="https://colab.research.google.com/github/my-unknown-account/LLMPreSS/blob/main/notebooks/interactive_search.ipynb"><img src="https://img.shields.io/badge/Try_in-Google_Colab-F9AB00?style=flat-square&logo=googlecolab&logoColor=white" alt="Try in Google Colab" /></a>&nbsp;<a href="https://huggingface.co/collections/JamshidJDMY/llmpress"><img src="https://img.shields.io/badge/🤗_Hugging_Face-Indexes-FFD21E?style=flat-square" alt="Hugging Face indexes" /></a>&nbsp;<a href="#quick-start"><img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.10+" /></a>&nbsp;<a href="#how-it-works"><img src="https://img.shields.io/badge/Local_Search-FAISS-0B7285?style=flat-square" alt="Local FAISS search" /></a>&nbsp;<a href="pyproject.toml"><img src="https://img.shields.io/badge/v0.1.0-8B5CF6?style=flat-square" alt="Version 0.1.0" /></a></p>
+<p align="center"><a href="https://colab.research.google.com/github/my-unknown-account/LLMPreSS/blob/main/notebooks/interactive_search.ipynb"><img src="https://img.shields.io/badge/Try_in-Google_Colab-F9AB00?style=flat-square&logo=googlecolab&logoColor=white" alt="Try in Google Colab" /></a>&nbsp;<a href="https://huggingface.co/collections/JamshidJDMY/llmpress"><img src="https://img.shields.io/badge/🤗_Hugging_Face-Indexes-FFD21E?style=flat-square" alt="Hugging Face indexes" /></a>&nbsp;<a href="#quick-start"><img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.10+" /></a>&nbsp;<a href="pyproject.toml"><img src="https://img.shields.io/badge/v0.1.0-8B5CF6?style=flat-square" alt="Version 0.1.0" /></a></p>
 
 **[🚀 Quick start](#quick-start)** · **[✨ Why LLMPreSS?](#why-llmpress)** · **[🧠 How it works](#how-it-works)** · **[📚 Indexes](#indexes-and-editions)** · **[🐍 Python API](#python-api)** · **[⚙️ Configuration](#configuration)**
 
@@ -74,10 +74,10 @@ for hit in results:
 
 On first use, LLMPreSS automatically downloads the selected published index and the BGE encoder specified by the index, then caches them for future searches.
 
-Prefer a Python script on your computer? Run the [local example](example_search.py):
+Prefer a Python script on your computer? Run the [local example](notebooks/example_search.py):
 
 ```bash
-python example_search.py
+python notebooks/example_search.py
 ```
 
 ### ☁️ Try LLMPreSS online with Google Colab
@@ -114,8 +114,6 @@ flowchart LR
 **The separation matters:** you get control over local semantic retrieval without operating a server that stores or searches the full pretraining corpus. Internet access is needed for the initial downloads and for retrieving the matching text; the downloaded encoder and index support local vector search.
 
 ## 📚 Indexes and editions
-
-### 3 corpora · 6 downloadable indexes · 2 editions each
 
 Explore the complete **[LLMPreSS index collection on Hugging Face](https://huggingface.co/collections/JamshidJDMY/llmpress)**. Each currently published corpus has both **Compact** and **Quality** editions:
 
@@ -300,7 +298,7 @@ Outputs are placed under `dist/`. The wheel includes the library and package met
 │   └── _engine.py
 ├── notebooks/
 │   └── interactive_search.ipynb
-├── example_search.py
+├── notebooks/example_search.py
 ├── pyproject.toml
 ├── requirements.txt
 └── README.md
