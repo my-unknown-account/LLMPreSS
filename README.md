@@ -139,10 +139,9 @@ and instruction-tuning data used by
 [RedPajama-INCITE-7B-Instruct](https://huggingface.co/togethercomputer/RedPajama-INCITE-7B-Instruct).
 The Amber index likewise includes both the pretraining and instruction-tuning
 data used by [AmberChat](https://huggingface.co/IFM/AmberChat). The OLMo index
-includes pretraining and supervised fine-tuning (SFT) data for
+includes pretraining and instruction-tuning data for
 [Olmo-3-7B-Instruct](https://huggingface.co/allenai/Olmo-3-7B-Instruct), excluding
-DPO and RL data. This lets you search across pretraining and instruction-tuning
-data for these models. For ClimbMix, we have not verified a
+DPO and RL data. For ClimbMix, we have not verified a
 released model trained on the entire indexed corpus without additional training data.
 
 - **📦 Compact:** Prioritizes a smaller index footprint for personal-computer use.
