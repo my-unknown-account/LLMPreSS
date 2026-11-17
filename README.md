@@ -123,14 +123,14 @@ flowchart LR
 
 ## 📚 Indexes and editions
 
-Explore the complete **[LLMPreSS index collection on Hugging Face](https://huggingface.co/collections/JamshidJDMY/llmpress)**. The available index editions and locally prepared releases are listed below:
+Explore the complete **[LLMPreSS index collection on Hugging Face](https://huggingface.co/collections/JamshidJDMY/llmpress)**. The index editions are listed below:
 
 | Corpus | Related LLM | Indexed passages | 📦 Compact | 🎯 Quality |
 | :--- | :--- | ---: | ---: | ---: |
 | **RedPajama** | [RedPajama-INCITE-7B-Instruct](https://huggingface.co/togethercomputer/RedPajama-INCITE-7B-Instruct) | ~1.53 billion | [**~61.5 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_RedPajama_compact) | [**~110.5 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_RedPajama_quality) |
 | **ClimbMix** | Exact corpus match not verified | ~614 million | [**~24.8 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_ClimbMix_compact) | [**~44.5 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_ClimbMix_quality) |
 | **Amber** | [AmberChat](https://huggingface.co/IFM/AmberChat) | ~1.21 billion | [**~48.5 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_Amber_compact) | [**~87.1 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_Amber_quality) |
-| **OLMo** | [Olmo-3-7B-Instruct](https://huggingface.co/allenai/Olmo-3-7B-Instruct) | ~6.87 billion | **~275.0 GB** (prepared locally) | **~494.8 GB** (prepared locally) |
+| **OLMo** | [Olmo-3-7B-Instruct](https://huggingface.co/allenai/Olmo-3-7B-Instruct) | ~6.87 billion | **~275.0 GB** | **~494.8 GB** |
 
 *Sizes are approximate downloads (decimal GB) for `index.faiss` + `lists.ivfdata`, excluding the separately cached encoder and any filesystem/download overhead. Click a size to view its Hugging Face repository.*
 
@@ -138,27 +138,12 @@ Explore the complete **[LLMPreSS index collection on Hugging Face](https://huggi
 and instruction-tuning data used by
 [RedPajama-INCITE-7B-Instruct](https://huggingface.co/togethercomputer/RedPajama-INCITE-7B-Instruct).
 The Amber index likewise includes both the pretraining and instruction-tuning
-data used by [AmberChat](https://huggingface.co/IFM/AmberChat). This lets you search
-across both training stages for each model. For ClimbMix, we have not verified a
+data used by [AmberChat](https://huggingface.co/IFM/AmberChat). The OLMo index
+includes pretraining and supervised fine-tuning (SFT) data for
+[Olmo-3-7B-Instruct](https://huggingface.co/allenai/Olmo-3-7B-Instruct), excluding
+DPO and RL data. This lets you search across pretraining and instruction-tuning
+data for these models. For ClimbMix, we have not verified a
 released model trained on the entire indexed corpus without additional training data.
-
-**OLMo coverage:** The OLMo index includes pretraining and supervised
-fine-tuning (SFT) data for
-[Olmo-3-7B-Instruct](https://huggingface.co/allenai/Olmo-3-7B-Instruct),
-excluding DPO and RL data. OLMo sizes come from the local release manifest;
-Hub publication has not been confirmed.
-
-To search an OLMo index, use the case-sensitive corpus name `"OLMo"`:
-
-```python
-index = SemanticIndex("OLMo", edition="compact", threads=32, verbose=True)
-```
-
-Automatic downloads require the corresponding
-`JamshidJDMY/LLMPreSS_OLMo_compact` or `JamshidJDMY/LLMPreSS_OLMo_quality`
-dataset to be published with the client index files (`index.faiss`, `index.json`,
-and `lists.ivfdata`). Alternatively, set `index_dir` to a compatible local client
-index directory.
 
 - **📦 Compact:** Prioritizes a smaller index footprint for personal-computer use.
 - **🎯 Quality:** Uses a higher-fidelity index configuration, trading additional storage for improved retrieval quality.
