@@ -130,7 +130,7 @@ Explore the complete **[LLMPreSS index collection on Hugging Face](https://huggi
 | **RedPajama** | [RedPajama-INCITE-7B-Instruct](https://huggingface.co/togethercomputer/RedPajama-INCITE-7B-Instruct) | ~1.53 billion | [**~61.5 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_RedPajama_compact) | [**~110.5 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_RedPajama_quality) |
 | **ClimbMix** | Exact corpus match not verified | ~614 million | [**~24.8 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_ClimbMix_compact) | [**~44.5 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_ClimbMix_quality) |
 | **Amber** | [AmberChat](https://huggingface.co/IFM/AmberChat) | ~1.21 billion | [**~48.5 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_Amber_compact) | [**~87.1 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_Amber_quality) |
-| **OLMo** | [Olmo-3-7B-Instruct](https://huggingface.co/allenai/Olmo-3-7B-Instruct), [Olmo-3.1-32B-Instruct](https://huggingface.co/allenai/Olmo-3.1-32B-Instruct) | ~6.87 billion | **~275.0 GB** (prepared locally) | **~494.8 GB** (prepared locally) |
+| **OLMo** | [Olmo-3-7B-Instruct](https://huggingface.co/allenai/Olmo-3-7B-Instruct) | ~6.87 billion | **~275.0 GB** (prepared locally) | **~494.8 GB** (prepared locally) |
 
 *Sizes are approximate downloads (decimal GB) for `index.faiss` + `lists.ivfdata`, excluding the separately cached encoder and any filesystem/download overhead. Click a size to view its Hugging Face repository.*
 
@@ -142,11 +142,11 @@ data used by [AmberChat](https://huggingface.co/IFM/AmberChat). This lets you se
 across both training stages for each model. For ClimbMix, we have not verified a
 released model trained on the entire indexed corpus without additional training data.
 
-**OLMo coverage:** The local corpus preparation includes Dolma 3 pretraining,
-Dolmino midtraining, Longmino long-context data, and Dolci instruction SFT data.
-This does not establish coverage of every DPO or RL training stage of the linked
-models. OLMo sizes come from the local release manifest; Hub publication has not
-been confirmed.
+**OLMo coverage:** The OLMo index includes pretraining and supervised
+fine-tuning (SFT) data for
+[Olmo-3-7B-Instruct](https://huggingface.co/allenai/Olmo-3-7B-Instruct),
+excluding DPO and RL data. OLMo sizes come from the local release manifest;
+Hub publication has not been confirmed.
 
 To search an OLMo index, use the case-sensitive corpus name `"OLMo"`:
 
