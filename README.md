@@ -130,7 +130,7 @@ Explore the complete **[LLMPreSS index collection on Hugging Face](https://huggi
 | **RedPajama** | [RedPajama-INCITE-7B-Instruct](https://huggingface.co/togethercomputer/RedPajama-INCITE-7B-Instruct) | ~1.53 billion | [**~61.5 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_RedPajama_compact) | [**~110.5 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_RedPajama_quality) |
 | **ClimbMix** | Exact corpus match not verified | ~614 million | [**~24.8 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_ClimbMix_compact) | [**~44.5 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_ClimbMix_quality) |
 | **Amber** | [AmberChat](https://huggingface.co/IFM/AmberChat) | ~1.21 billion | [**~48.5 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_Amber_compact) | [**~87.1 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_Amber_quality) |
-| **OLMo** | [Olmo-3-7B-Instruct](https://huggingface.co/allenai/Olmo-3-7B-Instruct) | ~6.87 billion | **~275.0 GB** | **~494.8 GB** |
+| **OLMo** | [Olmo-3-7B-Instruct](https://huggingface.co/allenai/Olmo-3-7B-Instruct) | ~6.87 billion | [**~275.0 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_OLMo_compact) | [**~494.8 GB**](https://huggingface.co/datasets/JamshidJDMY/LLMPreSS_OLMo_quality) |
 
 *Sizes are approximate downloads (decimal GB) for `index.faiss` + `lists.ivfdata`, excluding the separately cached encoder and any filesystem/download overhead. Click a size to view its Hugging Face repository.*
 
