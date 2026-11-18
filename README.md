@@ -337,3 +337,8 @@ Outputs are placed under `dist/`. The wheel includes the library and package met
 <a href="https://github.com/my-unknown-account/LLMPreSS/issues"><strong>💬 Report an issue</strong></a>
 
 </div>
+
+## Authors and Affiliation
+
+This work was conducted by **Jamshid Mozafari** and **Adam Jatowt**
+at the Data Science Group, University of Innsbruck, Austria.
