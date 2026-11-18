@@ -19,7 +19,11 @@ With prebuilt, compressed FAISS indexes, LLMPreSS makes large-scale semantic ret
 ---
 
 > [!WARNING]
-> This repository is temporarily hosted here to preserve anonymity during the review process. Upon publication, it will be transferred to the official GitHub repository of the Data Science Group at the University of Innsbruck. All rights to the contents of this repository are reserved by **the Data Science Group at the University of Innsbruck**.
+> This repository is temporarily hosted here to preserve anonymity during the review process. Upon publication, it will be transferred to the official GitHub page of the Data Science Group at the University of Innsbruck.
+>
+> All rights to this repository and its entire contents, including but not limited to source code, scripts, datasets, indexed files, documentation, configurations, models, and all other associated materials, are reserved by the Data Science Group at the University of Innsbruck. Unauthorized use, reproduction, modification, or redistribution of any part of this repository is prohibited without prior written permission.
+>
+> **© Data Science Group, University of Innsbruck. All rights reserved.**
 
 <a id="why-llmpress"></a>
 
